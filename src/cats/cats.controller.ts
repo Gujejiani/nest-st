@@ -1,4 +1,4 @@
-import { Controller, Get, Header, HttpCode, Post, Req } from '@nestjs/common';
+import { Controller, Get, Header, HttpCode, Post, Redirect, Req } from '@nestjs/common';
 import { Request } from 'express';
 
 @Controller('cats')
@@ -25,5 +25,13 @@ export class CatsController {
     list() {
       return 'This action adds a new cat';
     }
+
+    @Get('redirect')
+    @Redirect('https://nestjs.com', 301)
+    redirect(){
+      return 'This action redirects to nestjs.com';
+    }
+
+    // more about controllers https://docs.nestjs.com/controllers
 }
 
