@@ -3,6 +3,8 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  // global middlware 
+ // app.use(middlWare)
   await app.listen(4000);
 }
 bootstrap();

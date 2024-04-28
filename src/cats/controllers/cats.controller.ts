@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Header, HttpCode, Post, Redirect, Req } from '@nestjs/common';
+import { Body, Controller, Get, Header, HttpCode, HttpException, HttpStatus, Post, Redirect, Req } from '@nestjs/common';
 import { Request } from 'express';
 import { CreateCatDto } from 'src/cats/dto/create-cat.dto';
 import { Cat } from 'src/interfaces/cats.interface';
@@ -18,8 +18,9 @@ export class CatsController {
     }
 
   @Get()
-  findAll(@Req() request: Request): Cat[] {
-    console.log(request);
+  findAll(@Req() _request: Request): Cat[] {
+    // console.log(request);
+
     return  this.catsService.findAll();
   }
 
