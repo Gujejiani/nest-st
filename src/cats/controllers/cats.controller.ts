@@ -1,9 +1,10 @@
-import { Body, Controller, Get, Header, HttpCode, HttpException, HttpStatus, Post, Redirect, Req } from '@nestjs/common';
+import { Body, Controller, Get, Header, HttpCode, HttpException, HttpStatus, Param, ParseIntPipe, Post, Redirect, Req, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Request } from 'express';
 import { CreateCatDto } from 'src/cats/dto/create-cat.dto';
 import { Cat } from 'src/interfaces/cats.interface';
 
 import { CatsService } from 'src/cats/services/cats.service';
+import { ZodValidationPipe } from 'src/pipes/validation.pipe';
 
 @Controller('cats')
 export class CatsController {
@@ -13,7 +14,8 @@ export class CatsController {
     }
 
     @Post('create')
-     createCat(@Body() createCatDto: CreateCatDto) {
+    @UsePipes(new ValidationPipe({ transform: true }))
+    createCat(@Body()  createCatDto: CreateCatDto) {
      return this.catsService.create(createCatDto);
     }
 
@@ -23,6 +25,13 @@ export class CatsController {
     // throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
     return  this.catsService.findAll();
   }
+
+
+  @Get(':id')
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.catsService.findOne(id);
+  }
+
 
   @Post('add')
   @HttpCode(204) // adding status codex

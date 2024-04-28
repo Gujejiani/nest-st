@@ -6,3 +6,7 @@ Content-Type: application/json
     "breed": "Golden Retriever",
     "age": 23
 }
+
+### GEt Cat by index
+
+GET http://localhost:4000/cats/1
