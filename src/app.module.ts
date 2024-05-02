@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { createConnection } from 'net';
-
+// covered Dynamic modules
 @Module({
   imports: [CatsModule],
   controllers: [AppController, ],

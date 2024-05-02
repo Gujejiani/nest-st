@@ -8,5 +8,13 @@ import { CatsService } from 'src/cats/services/cats.service';
     providers: [CatsService],
 })
 export class CatsModule {
-
+    static register(){
+        console.log('Cats Module is registered')
+        return {
+            module: CatsModule,
+            providers: [CatsService],
+            controllers: [CatsController],
+            exports: [CatsService]
+        }
+    }
 }
