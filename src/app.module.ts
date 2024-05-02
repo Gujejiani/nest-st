@@ -3,11 +3,23 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
+import { createConnection } from 'net';
 
 @Module({
   imports: [CatsModule],
   controllers: [AppController, ],
-  providers: [AppService],
+  providers: [AppService,
+  
+
+    // At times, the application start should be delayed until one or more asynchronous tasks are completed. 
+    // {
+    //   provide: 'ASYNC_CONNECTION',
+    //   useFactory: async () => {
+    //     const connection = await createConnection(options);
+    //     return connection;
+    //   },
+    // }
+  ],
 })
 export class AppModule {
 
