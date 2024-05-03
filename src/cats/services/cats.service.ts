@@ -1,8 +1,11 @@
-import { HttpException, HttpStatus, Injectable, NotFoundException } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable, NotFoundException, Scope } from "@nestjs/common";
 import { Cat } from "src/interfaces/cats.interface";
 
 
-@Injectable()
+@Injectable({
+  scope: Scope.REQUEST,
+  durable: true
+})
 export class CatsService {
     private readonly cats: Cat[] = [];
 

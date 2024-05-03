@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Header, HttpCode, HttpException, HttpStatus, Param, ParseIntPipe, Post, Redirect, Req, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Header, HttpCode, HttpException, HttpStatus, Param, ParseIntPipe, Post, Redirect, Req, Scope, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Request } from 'express';
 import { CreateCatDto } from 'src/cats/dto/create-cat.dto';
 import { Cat } from 'src/interfaces/cats.interface';
@@ -9,7 +9,11 @@ import { RolesGuard } from '../guards/roles.guard';
 import { Roles } from '../decorators/roles.decorator';
 import { LoggingInterceptor } from 'src/interceptors/log.interceptor';
 
-@Controller('cats')
+@Controller({
+  path: 'cats',
+  // scope: Scope.REQUEST
+
+})
 @UseGuards(RolesGuard)
 @UseInterceptors(LoggingInterceptor)
 export class CatsController {
