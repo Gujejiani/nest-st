@@ -14,8 +14,11 @@ import {
       let tenantSubTreeId: ContextId;
   
       if (tenants.has(tenantId)) {
+     
         tenantSubTreeId = tenants.get(tenantId) as ContextId;
+        console.log('tenantId found', tenantSubTreeId)
       } else {
+        console.log('tenantId not found', tenantId)
         tenantSubTreeId = ContextIdFactory.create();
         tenants.set(tenantId, tenantSubTreeId);
       }
