@@ -56,6 +56,12 @@ export class CatsController {
       return 'This action adds a new cat';
     }
 
+    // example of lazy loading
+    // @Get('admin')
+    // async getAdminPanel() {
+    //   const { AdminModule } = await import('./admin/admin.module');
+    //   // Now you can use AdminModule to handle the request
+    // }
     @Get('redirect')
     @Redirect('https://nestjs.com', 301)
     redirect(){
