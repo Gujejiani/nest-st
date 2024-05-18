@@ -7,7 +7,9 @@ import {
   import { Request } from 'express';
   
   const tenants = new Map<string, ContextId>();
-  
+  /**
+   * This strategy is used to aggregate contextId by tenantId
+   */
   export class AggregateByTenantContextIdStrategy implements ContextIdStrategy {
     attach(contextId: ContextId, request: Request) {
       const tenantId = request.headers['x-tenant-id'] as string;
