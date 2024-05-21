@@ -8,7 +8,16 @@ import {
   
   const tenants = new Map<string, ContextId>();
   /**
-   * This strategy is used to aggregate contextId by tenantId
+   * This strategy is used to aggregate contextId by tenantId in the request header.
+   * It creates a new contextId for each tenantId and stores it in a map.
+   * If the tenantId is already in the map, it returns the stored contextId.
+   * If the tenantId is not in the map, it creates a new contextId and stores it in the map.
+   * @param contextId
+   * @param request
+   * @returns a function that returns the stored contextId if the tenantId is already in the map.
+   * Otherwise, it creates a new contextId and stores it in the map.
+   * If the tree is not durable, it returns the original "contextId" object.
+   * 
    */
   export class AggregateByTenantContextIdStrategy implements ContextIdStrategy {
     attach(contextId: ContextId, request: Request) {
