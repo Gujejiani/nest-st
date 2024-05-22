@@ -12,11 +12,11 @@ import { Cat } from "src/interfaces/cats.interface";
 export class CatsService implements OnModuleInit {
     private readonly cats: Cat[] = [];
     private service: AnimalsController;
-    constructor(private moduleRef: ModuleRef) {}
+    // constructor(private moduleRef: ModuleRef) {}
     onModuleInit() {
       // doesn't fire if score is Request or transient and using durable
       console.log('cats service initialized')
-      this.service = this.moduleRef.get(AnimalsController);
+      // this.service = this.moduleRef.get(AnimalsController);
       console.log(this.service)
     }
     create(cat: Cat) {

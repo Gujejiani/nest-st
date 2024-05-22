@@ -30,7 +30,7 @@ export class CatsController {
     }
 
   @Get()
-  findAll(@Req() _request: Request): Cat[] {
+  findAll(): Cat[] {
     // console.log(request);
     // throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
     return  this.catsService.findAll();
