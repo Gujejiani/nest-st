@@ -1,4 +1,5 @@
 import { HttpException, HttpStatus, Injectable, NotFoundException, OnModuleInit, Scope } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { ModuleRef } from "@nestjs/core";
 import { AnimalsController } from "src/animals/animals.controller";
 import { CommonService } from "src/common/common.service";
@@ -12,6 +13,7 @@ import { Cat } from "src/interfaces/cats.interface";
 export class CatsService implements OnModuleInit {
     private readonly cats: Cat[] = [];
     private service: AnimalsController;
+    constructor(private configService: ConfigService) {}
     // constructor(private moduleRef: ModuleRef) {}
     onModuleInit() {
       // doesn't fire if score is Request or transient and using durable
@@ -25,6 +27,8 @@ export class CatsService implements OnModuleInit {
     }
   
     findAll(): Cat[] {
+      const dbUser = this.configService.get<string>('DATABASE_USER')
+      console.log(dbUser, 'jaja')
       return this.cats;
     }
     findOne(id: number): Cat {

@@ -3,9 +3,15 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
+import { ConfigModule } from '@nestjs/config';
 // covered Dynamic modules
 @Module({
-  imports: [CatsModule],
+  imports: [CatsModule, ConfigModule.forRoot(
+    {
+      envFilePath: '.development.env',
+      isGlobal: true
+    }
+  )],
   controllers: [AppController ],
   providers: [AppService,
   
