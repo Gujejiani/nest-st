@@ -5,6 +5,8 @@ import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { CacheModule } from '@nestjs/cache-manager';
+import { ScheduleModule } from '@nestjs/schedule';
+
 // covered Dynamic modules
 @Module({
   imports: [CacheModule.register({
@@ -12,6 +14,7 @@ import { CacheModule } from '@nestjs/cache-manager';
 
     max: 20, // maximum number of items in cache
     isGlobal: true
+    
   
   }), 
   ConfigModule.forRoot(
@@ -19,6 +22,9 @@ import { CacheModule } from '@nestjs/cache-manager';
       envFilePath: '.development.env',
       isGlobal: true
     }),
+    ScheduleModule.forRoot(
+     
+    ),
   CatsModule],
   controllers: [AppController ],
   providers: [AppService,
