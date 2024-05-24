@@ -4,7 +4,7 @@ import { ModuleRef } from "@nestjs/core";
 import { AnimalsController } from "src/animals/animals.controller";
 import { CommonService } from "src/common/common.service";
 import { Cat } from "src/interfaces/cats.interface";
-
+import { EventEmitter2 } from "@nestjs/event-emitter";
 
 @Injectable({
   scope: Scope.REQUEST,
@@ -13,7 +13,7 @@ import { Cat } from "src/interfaces/cats.interface";
 export class CatsService implements OnModuleInit {
     private readonly cats: Cat[] = [];
     private service: AnimalsController;
-    constructor(private configService: ConfigService) {}
+    constructor(private configService: ConfigService, private eventEmitter: EventEmitter2) {}
     // constructor(private moduleRef: ModuleRef) {}
     onModuleInit() {
       // doesn't fire if score is Request or transient and using durable
@@ -22,6 +22,7 @@ export class CatsService implements OnModuleInit {
       console.log(this.service)
     }
     create(cat: Cat) {
+        this.eventEmitter.emit('cat_created', cat)
       this.cats.push(cat);
       return 'cat added'
     }
