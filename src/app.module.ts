@@ -3,9 +3,16 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
+import { CacheModule } from '@nestjs/cache-manager';
 // covered Dynamic modules
 @Module({
-  imports: [CatsModule],
+  imports: [CacheModule.register({
+    ttl: 10, // seconds
+
+    max: 20, // maximum number of items in cache
+    isGlobal: true
+  
+  }), CatsModule],
   controllers: [AppController ],
   providers: [AppService,
   

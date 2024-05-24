@@ -8,6 +8,7 @@ import { ZodValidationPipe } from 'src/pipes/validation.pipe';
 import { RolesGuard } from '../guards/roles.guard';
 import { Roles } from '../decorators/roles.decorator';
 import { LoggingInterceptor } from 'src/interceptors/log.interceptor';
+import { CacheKey, CacheTTL } from '@nestjs/cache-manager';
 
 @Controller({
   path: 'cats',
@@ -30,6 +31,8 @@ export class CatsController {
     }
 
   @Get()
+  @CacheKey('custom_key')
+  @CacheTTL(20)
   findAll(): Cat[] {
     // console.log(request);
     // throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
