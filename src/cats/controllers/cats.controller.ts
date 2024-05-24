@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Header, HttpCode, HttpException, HttpStatus, Param, ParseIntPipe, Post, Redirect, Req, Scope, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Header, HttpCode, HttpException, HttpStatus, Param, ParseIntPipe, Post, Redirect, Req, Res, Scope, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Request } from 'express';
 import { CreateCatDto } from 'src/cats/dto/create-cat.dto';
 import { Cat } from 'src/interfaces/cats.interface';
@@ -9,6 +9,7 @@ import { RolesGuard } from '../guards/roles.guard';
 import { Roles } from '../decorators/roles.decorator';
 import { LoggingInterceptor } from 'src/interceptors/log.interceptor';
 import { CacheKey, CacheTTL } from '@nestjs/cache-manager';
+import { Response } from 'express';
 
 @Controller({
   path: 'cats',
@@ -33,8 +34,9 @@ export class CatsController {
   @Get()
   @CacheKey('custom_key')
   @CacheTTL(20)
-  findAll(): Cat[] {
+  findAll(@Res({ passthrough: true }) response: Response): Cat[] {
     // console.log(request);
+    response.cookie('test', 'test');
     // throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
     return  this.catsService.findAll();
   }
