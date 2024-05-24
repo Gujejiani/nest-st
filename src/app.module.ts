@@ -1,3 +1,4 @@
+import { ConfigModule } from '@nestjs/config';
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -12,7 +13,13 @@ import { CacheModule } from '@nestjs/cache-manager';
     max: 20, // maximum number of items in cache
     isGlobal: true
   
-  }), CatsModule],
+  }), 
+  ConfigModule.forRoot(
+    {
+      envFilePath: '.development.env',
+      isGlobal: true
+    }),
+  CatsModule],
   controllers: [AppController ],
   providers: [AppService,
   
@@ -26,6 +33,7 @@ import { CacheModule } from '@nestjs/cache-manager';
     //   },
     // }
   ],
+ 
 })
 export class AppModule {
 
