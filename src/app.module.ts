@@ -7,6 +7,8 @@ import { LoggerMiddleware } from './middleware/logger.middleware';
 import { CacheModule } from '@nestjs/cache-manager';
 import { ScheduleModule } from '@nestjs/schedule';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 // covered Dynamic modules
 @Module({
@@ -27,7 +29,10 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
      
     ),
     EventEmitterModule.forRoot(),
-  CatsModule],
+  CatsModule,
+  UsersModule,
+  AuthModule
+],
   controllers: [AppController ],
   providers: [AppService,
   

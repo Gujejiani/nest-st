@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { AggregateByTenantContextIdStrategy } from './global/contextIdStrategy';
 import * as cookieParser from 'cookie-parser';
 import * as compression from 'compression';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule,{
@@ -18,6 +19,7 @@ async function bootstrap() {
 
   // Apply custom context ID strategy
   ContextIdFactory.apply(new AggregateByTenantContextIdStrategy());
+  app.useGlobalPipes(new ValidationPipe());
 
   // Start the server
   await app.listen(4000);
