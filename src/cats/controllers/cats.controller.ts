@@ -37,6 +37,7 @@ export class CatsController {
   findAll(@Res({ passthrough: true }) response: Response): Cat[] {
     // console.log(request);
     response.cookie('test', 'test');
+    // set content length 
     // throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
     return  this.catsService.findAll();
   }
