@@ -9,10 +9,16 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './cats/guards/auth.guard';
 
 // covered Dynamic modules
 @Module({
-  imports: [CacheModule.register({
+  imports: [
+   
+    
+    
+    CacheModule.register({
     ttl: 10, // seconds
 
     max: 20, // maximum number of items in cache
@@ -35,7 +41,10 @@ import { AuthModule } from './auth/auth.module';
 ],
   controllers: [AppController ],
   providers: [AppService,
-  
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
 
     // At times, the application start should be delayed until one or more asynchronous tasks are completed. 
     // {

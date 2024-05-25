@@ -10,6 +10,7 @@ import { Roles } from '../decorators/roles.decorator';
 import { LoggingInterceptor } from 'src/interceptors/log.interceptor';
 import { CacheKey, CacheTTL } from '@nestjs/cache-manager';
 import { Response } from 'express';
+import { Public } from '../decorators/public.decorator';
 
 @Controller({
   path: 'cats',
@@ -31,6 +32,7 @@ export class CatsController {
      return this.catsService.create(createCatDto);
     }
 
+  @Public()
   @Get()
   @CacheKey('custom_key')
   @CacheTTL(20)
