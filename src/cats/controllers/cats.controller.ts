@@ -11,6 +11,8 @@ import { LoggingInterceptor } from 'src/interceptors/log.interceptor';
 import { CacheKey, CacheTTL } from '@nestjs/cache-manager';
 import { Response } from 'express';
 import { Public } from '../decorators/public.decorator';
+import { Role } from 'src/enums/role.enum';
+import { MetadataRoles } from '../decorators/newRoles.decorator';
 
 @Controller({
   path: 'cats',
@@ -24,7 +26,8 @@ export class CatsController {
     constructor(private catsService: CatsService){
       
     }
-
+    @MetadataRoles(Role.Admin)
+    @Public()
     @Post('create')
     @UsePipes(new ValidationPipe({ transform: true }))
     @Roles(['admin'])
